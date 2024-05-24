@@ -16,30 +16,25 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Produto {
+public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imagem;
     private String nome;
     private String descricao;
-    private boolean disponivel;
-    private int qtdEstoque;
     private BigDecimal preco;
     private LocalDate dataCadastro;
 
-    public Produto(String imagem,
+    public Categoria(String imagem,
                    String nome,
                    String descricao,
-                   boolean disponivel,
                    int qtdEstoque,
                    BigDecimal preco,
                    LocalDate dataCadastro) {
         this.imagem = imagem;
         this.nome = nome;
         this.descricao = descricao;
-        this.disponivel = disponivel;
-        this.qtdEstoque = qtdEstoque;
         this.preco = preco;
         this.dataCadastro = dataCadastro;
     }

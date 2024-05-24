@@ -1,7 +1,7 @@
-package com.carlosribeiro.apirestful.controller;
+package com.claudiasimoes.apirestful.controller;
 
-import com.carlosribeiro.apirestful.model.Produto;
-import com.carlosribeiro.apirestful.service.ProdutoService;
+import com.claudiasimoes.apirestful.model.Produto;
+import com.claudiasimoes.apirestful.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

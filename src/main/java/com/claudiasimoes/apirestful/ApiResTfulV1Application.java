@@ -1,7 +1,7 @@
-package com.carlosribeiro.apirestful;
+package com.claudiasimoes.apirestful;
 
-import com.carlosribeiro.apirestful.model.Produto;
-import com.carlosribeiro.apirestful.repository.ProdutoRepository;
+import com.claudiasimoes.apirestful.model.Produto;
+import com.claudiasimoes.apirestful.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
