@@ -1,36 +1,30 @@
 package com.claudiasimoes.apirestful.controller;
 
+import com.claudiasimoes.apirestful.exception.EntidadeNaoEncontradaException;
 import com.claudiasimoes.apirestful.model.Categoria;
+import com.claudiasimoes.apirestful.model.CategoriaDTO;
 import com.claudiasimoes.apirestful.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@CrossOrigin("http://localhost:5173")
 @RestController
 @RequestMapping("categorias")
 public class CategoriaController {
 
-    @Autowired       // http://localhost:8080/categorias
+    @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping
-    public List<Categoria> recuperarCategorias() {
-        return categoriaService.recuperarCategorias();
+    @GetMapping("{idCategoria}")
+    public Categoria recuperarCategoria(@PathVariable("idCategoria") Long idCategoria) {
+        return categoriaService.recuperarCategoria(idCategoria)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        "Categoria número " + idCategoria + " não encontrada"));
     }
 
-    @PostMapping
-    public Categoria cadastrarCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.cadastrarCategoria(categoria);
-    }
-
-    @PutMapping
-    public Categoria alterarCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.alterarCategoria(categoria);
-    }
-
-    @DeleteMapping ("{idcategoria}")     // http://localhost:8080/categorias/1
-    public void removerCategoria(@PathVariable("idCategoria") Long id) {
-        categoriaService.removerCategoria(id);
+    @GetMapping("{idCategoria}/produtos")          // http://localhost:8080/categorias/1/produtos
+    public CategoriaDTO recuperarCategoriaComProdutos(@PathVariable("idCategoria") Long idCategoria) {
+        Categoria categoria = categoriaService.recuperarCategoriaComProdutos(idCategoria);
+        return new CategoriaDTO(categoria.getId(), categoria.getNome(), categoria.getProdutos());
     }
 }

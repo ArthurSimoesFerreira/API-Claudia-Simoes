@@ -1,16 +1,13 @@
 package com.claudiasimoes.apirestful.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,22 +17,13 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String imagem;
     private String nome;
-    private String descricao;
-    private BigDecimal preco;
-    private LocalDate dataCadastro;
+    @JsonIgnore
+    @OneToMany (mappedBy = "categoria")
+    private List<Produto> produtos;
 
-    public Categoria(String imagem,
-                   String nome,
-                   String descricao,
-                   int qtdEstoque,
-                   BigDecimal preco,
-                   LocalDate dataCadastro) {
-        this.imagem = imagem;
+    public Categoria(String nome) {
         this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.dataCadastro = dataCadastro;
+        this.produtos = new ArrayList<>();
     }
 }
